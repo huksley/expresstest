@@ -5,9 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
 var browserify = require('browserify-middleware');
-
+var vueify = require('vueify');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var babelify = require("babelify");
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(sassMiddleware({
   src: path.join(__dirname, 'web'),
   dest: path.join(__dirname, 'web'),
@@ -31,6 +33,20 @@ app.use(sassMiddleware({
 }));
 
 var env = process.env.NODE_ENV || 'development';
+
+var babelify2 = function(file) {
+  return babelify(file, {
+    "presets": ["env"],
+    'plugins': [ "transform-vue-jsx" ]
+  });
+};
+
+browserify.settings({
+  transform: [ babelify2 ], // [reactifyES6],
+  extensions: ['.js', '.jsx'],
+  grep: /\.jsx?$/
+})
+
 if (env === 'development') {
   app.use('/js/main.js', browserify(__dirname + '/web/js/main.jsx'));
 }
