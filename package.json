@@ -1,0 +1,60 @@
+{
+	"name": "expapp",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "node server.js",
+		"watch": "nodemon --watch routes --watch views -e js,twig --watch app.js --watch server.js server.js",
+		"build": "gulp resources js css"
+	},
+	"dependencies": {
+		"aliasify": "^2.1.0",
+		"babel-core": "^6.26.0",
+		"babel-preset-es2015": "^6.24.1",
+		"babelify": "^8.0.0",
+		"bootstrap": "^3.3.7",
+		"bootstrap-sass": "^3.3.7",
+		"browserify-middleware": "^8.1.0",
+		"cookie-parser": "~1.4.3",
+		"debug": "~2.6.9",
+		"express": "~4.16.0",
+		"font-awesome": "^4.7.0",
+		"html5shiv": "^3.7.3",
+		"http-errors": "~1.6.2",
+		"jquery": "^3.3.1",
+		"morgan": "~1.9.0",
+		"node-sass-middleware": "0.11.0",
+		"respond.js": "^1.4.2",
+		"twig": "~0.10.3",
+		"vinyl-transform": "^1.0.0",
+		"vue": "^2.5.13"
+	},
+	"devDependencies": {
+		"gulp": "^3.9.1",
+		"gulp-concat": "^2.6.1",
+		"gulp-ext-replace": "^0.3.0",
+		"gulp-less": "^3.4.0",
+		"gulp-load-plugins": "^1.5.0",
+		"gulp-merge": "^0.1.1",
+		"gulp-minify": "^2.1.0",
+		"gulp-rename": "^1.2.2",
+		"gulp-sass": "^3.1.0",
+		"gulp-sourcemaps": "^2.6.3",
+		"gulp-uglify": "^3.0.0",
+		"vinyl-buffer": "^1.0.1",
+		"vinyl-source-stream": "^2.0.0",
+		"vueify": "^9.4.1",
+		"watchify": "^3.9.0"
+	},
+	"browserify": {
+		"transform": [
+			"babelify",
+			"vueify",
+			"aliasify"
+		]
+	},
+	"browser": {
+		"vue": "vue/dist/vue.common.js",
+		"bootstrap": "bootstrap-sass/assets/javascripts/bootstrap.js"
+	}
+}
